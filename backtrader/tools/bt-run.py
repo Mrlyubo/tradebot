@@ -3,8 +3,20 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-# Select top 7 market cap growth stock each year, and invest it next year. CAGR = 31%, 8 years 745%. Compared to VOO 8.45%, NVDA 44%.
-top_stocks_per_year = {2017: ['AMD', 'NVDA', 'FCX', 'TRGP', 'TPL', 'OKE', 'STLD'], 2018: ['ALGN', 'ANET', 'TTWO', 'BA', 'NVDA', 'NVR', 'FSLR'], 2019: ['ENPH', 'DXCM', 'AXON', 'LULU', 'KDP', 'AMD', 'FTNT'], 2020: ['ENPH', 'PODD', 'AMD', 'PAYC', 'LRCX', 'TER', 'BLDR'], 2021: ['TSLA', 'ENPH', 'MRNA', 'CRWD', 'GNRC', 'FCX', 'ALB'], 2022: ['DVN', 'F', 'FANG', 'FTNT', 'NVDA', 'NUE', 'BLDR'], 2023: ['FSLR', 'TPL', 'OXY', 'STLD', 'SMCI', 'ENPH', 'HES'], 2024: ['SMCI', 'NVDA', 'CRWD', 'META', 'PLTR', 'PANW', 'BLDR'], 2025: ['VST', 'PLTR', 'UAL', 'TPL', 'CEG', 'TRGP', 'NVDA']}
+# Top 7 stock  market cap groth rate each year, CAGR = 32%, (8 yrs return 830%), maxdrawdown = -13%
+# Compared to VOO CAGR 8.45% (8 yrs return 91%), maxdrawdon = -16%
+
+ 
+top7_by_growth = {
+    2017: ['AMD', 'NVDA', 'FCX', 'TRGP', 'TPL', 'OKE', 'STLD'], 
+    2018: ['ALGN', 'ANET', 'TTWO', 'BA', 'NVDA', 'NVR', 'FSLR'],
+    2019: ['ENPH', 'DXCM', 'AXON', 'LULU', 'KDP', 'AMD', 'FTNT'], 
+    2020: ['ENPH', 'PODD', 'AMD', 'PAYC', 'LRCX', 'TER', 'BLDR'], 
+    2021: ['TSLA', 'ENPH', 'MRNA', 'CRWD', 'GNRC', 'FCX', 'ALB'], 
+    2022: ['DVN', 'F', 'FANG', 'FTNT', 'NVDA', 'NUE', 'BLDR'], 
+    2023: ['FSLR', 'TPL', 'OXY', 'STLD', 'SMCI', 'ENPH', 'HES'], 
+    2024: ['SMCI', 'NVDA', 'CRWD', 'META', 'PLTR', 'PANW', 'BLDR'], 
+    2025: ['VST', 'PLTR', 'UAL', 'TPL', 'CEG', 'TRGP', 'NVDA']}
 
 # --- Technical Indicator Helper ---
 def compute_RSI(series, window=3):
@@ -146,17 +158,17 @@ def create_mag7_etf_df(start_date, end_date, start_capital=100000.0):
     return etf_df
 
 # --- Self-Made dynamic ETF ---
-def create_dynamic_etf_df(top_stocks_per_year, start_date, end_date, start_capital=0.0):
+def create_dynamic_etf_df(top7_by_growth, start_date, end_date, start_capital=0.0):
     """
     Constructs a dynamic ETF from yearly top stock selections:
     - Downloads daily close prices for all stocks
-    - Creates yearly portfolios based on top_stocks_per_year
+    - Creates yearly portfolios based on top7_by_growth
     - Normalizes each stock to its start-of-year value
     - Takes equally weighted average within each year
     - Scales by the starting capital
     
     Parameters:
-    - top_stocks_per_year: dict with years as keys and lists of stock tickers as values
+    - top7_by_growth: dict with years as keys and lists of stock tickers as values
     - start_date: start date for data download
     - end_date: end date for data download
     - start_capital: initial capital to scale the ETF values
@@ -165,9 +177,9 @@ def create_dynamic_etf_df(top_stocks_per_year, start_date, end_date, start_capit
     - DataFrame with 'Close' and 'Volume' columns
     """
     # Get all unique stocks
-    # top_stocks_per_year = ["AAPL", "AMZN", "GOOG", "META", "MSFT", "TSLA", "NVDA"]
-    for year in sorted(top_stocks_per_year.keys()):
-        df = yf.download(top_stocks_per_year[year], start=start_date, end=end_date)['Close']
+    # top7_by_growth = ["AAPL", "AMZN", "GOOG", "META", "MSFT", "TSLA", "NVDA"]
+    for year in sorted(top7_by_growth.keys()):
+        df = yf.download(top7_by_growth[year], start=start_date, end=end_date)['Close']
     df.index = pd.to_datetime(df.index)
     normalized = df.div(df.iloc[0])
     etf_series = normalized.mean(axis=1) * start_capital
@@ -182,17 +194,17 @@ def get_stock_data(ticker, start_date, end_date):
     return df
 
 def dynamic_multi_stock_portfolio_series(
-    top_stocks_per_year, start_date, end_date, monthly_investment=1000.0):
+    top7_by_growth, start_date, end_date, monthly_investment=1000.0):
     """
     Dynamic multi-stock portfolio strategy:
     - Invests monthly_investment each month
     - Distributes investment equally among selected stocks for each year
-    - Rebalances portfolio annually according to top_stocks_per_year
+    - Rebalances portfolio annually according to top7_by_growth
     """
     # Initialize portfolio tracking
     portfolio = pd.DataFrame()
     all_stocks = set()
-    for stocks in top_stocks_per_year.values():
+    for stocks in top7_by_growth.values():
         all_stocks.update(stocks)
     
     # Download data for all stocks
@@ -211,10 +223,10 @@ def dynamic_multi_stock_portfolio_series(
     # Process each year
     for year in range(int(start_date[:4]), int(end_date[:4])):
         print(f"~ year: {year}")
-        if year not in top_stocks_per_year:
+        if year not in top7_by_growth:
             continue
         
-        current_stocks = top_stocks_per_year[year]
+        current_stocks = top7_by_growth[year]
         print(f"~current_stocks: {current_stocks}")
         monthly_per_stock = monthly_investment / len(current_stocks)
         print(f"~monthly_per_stock: {monthly_per_stock}")
@@ -336,7 +348,7 @@ mag7_etf_df = create_mag7_etf_df(start_date, end_date, start_capital)
 data["Mag7 ETF"] = mag7_etf_df
 
 dynamic_etf_df = create_dynamic_etf_df(
-            top_stocks_per_year,
+            top7_by_growth,
             start_date,
             end_date,
             100000
