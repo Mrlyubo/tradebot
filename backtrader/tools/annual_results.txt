@@ -1,0 +1,272 @@
+=== AMZN Annual Results ===
+
+ For AMZN, Regular DCA : 
+2017: Portfolio = $15,454.92, Invested = $12,500.00, Profit = 23.64%, CAGR = 23.64%, Max Drawdown = 0.00%
+2018: Portfolio = $37,401.08, Invested = $25,000.00, Profit = 49.60%, CAGR = 22.31%, Max Drawdown = -14.29%
+2019: Portfolio = $50,292.84, Invested = $37,500.00, Profit = 34.11%, CAGR = 10.28%, Max Drawdown = -9.19%
+2020: Portfolio = $107,041.24, Invested = $50,000.00, Profit = 114.08%, CAGR = 20.96%, Max Drawdown = -12.35%
+2021: Portfolio = $127,491.18, Invested = $62,500.00, Profit = 103.99%, CAGR = 15.32%, Max Drawdown = -4.97%
+2022: Portfolio = $80,184.41, Invested = $75,000.00, Profit = 6.91%, CAGR = 1.12%, Max Drawdown = -36.97%
+2023: Portfolio = $139,387.71, Invested = $87,500.00, Profit = 59.30%, CAGR = 6.88%, Max Drawdown = -11.19%
+2024: Portfolio = $214,388.06, Invested = $100,000.00, Profit = 114.39%, CAGR = 10.00%, Max Drawdown = -9.58%
+
+ For AMZN, Risk-Managed Enhanced Weighted DCA:
+2017: Portfolio = $19,084.08, Invested = $15,310.40, Profit = 24.65%, CAGR = 24.65%, Max Drawdown = 0.00%
+2018: Portfolio = $41,474.98, Invested = $26,510.90, Profit = 56.45%, CAGR = 25.08%, Max Drawdown = -15.54%
+2019: Portfolio = $60,143.17, Invested = $44,495.82, Profit = 35.17%, CAGR = 10.57%, Max Drawdown = -7.62%
+2020: Portfolio = $122,086.52, Invested = $55,030.78, Profit = 121.85%, CAGR = 22.04%, Max Drawdown = -12.48%
+2021: Portfolio = $147,395.96, Invested = $71,202.57, Profit = 107.01%, CAGR = 15.66%, Max Drawdown = -4.96%
+2022: Portfolio = $132,967.15, Invested = $82,629.97, Profit = 60.92%, CAGR = 8.25%, Max Drawdown = -15.36%
+2023: Portfolio = $155,922.02, Invested = $95,310.37, Profit = 63.59%, CAGR = 7.28%, Max Drawdown = 0.00%
+2024: Portfolio = $238,016.55, Invested = $107,743.03, Profit = 120.91%, CAGR = 10.41%, Max Drawdown = -9.65%
+
+==================================================
+
+=== NVDA Annual Results ===
+
+ For NVDA, Regular DCA : 
+2017: Portfolio = $18,249.00, Invested = $12,500.00, Profit = 45.99%, CAGR = 45.99%, Max Drawdown = 0.00%
+2018: Portfolio = $24,952.65, Invested = $25,000.00, Profit = -0.19%, CAGR = -0.09%, Max Drawdown = -36.45%
+2019: Portfolio = $46,723.18, Invested = $37,500.00, Profit = 24.60%, CAGR = 7.61%, Max Drawdown = -22.58%
+2020: Portfolio = $139,200.33, Invested = $50,000.00, Profit = 178.40%, CAGR = 29.17%, Max Drawdown = -10.47%
+2021: Portfolio = $349,739.53, Invested = $62,500.00, Profit = 459.58%, CAGR = 41.11%, Max Drawdown = -7.15%
+2022: Portfolio = $202,722.76, Invested = $75,000.00, Profit = 170.30%, CAGR = 18.02%, Max Drawdown = -56.49%
+2023: Portfolio = $572,481.04, Invested = $87,500.00, Profit = 554.26%, CAGR = 30.78%, Max Drawdown = -12.40%
+2024: Portfolio = $1,716,377.52, Invested = $100,000.00, Profit = 1616.38%, CAGR = 42.67%, Max Drawdown = -12.98%
+
+ For NVDA, Risk-Managed Enhanced Weighted DCA:
+2017: Portfolio = $19,007.45, Invested = $12,842.11, Profit = 48.01%, CAGR = 48.01%, Max Drawdown = 0.00%
+2018: Portfolio = $37,656.48, Invested = $27,597.50, Profit = 36.45%, CAGR = 16.81%, Max Drawdown = -17.95%
+2019: Portfolio = $59,091.69, Invested = $42,521.41, Profit = 38.97%, CAGR = 11.59%, Max Drawdown = 0.00%
+2020: Portfolio = $153,169.63, Invested = $52,900.55, Profit = 189.54%, CAGR = 30.45%, Max Drawdown = -10.68%
+2021: Portfolio = $380,607.97, Invested = $64,177.80, Profit = 493.05%, CAGR = 42.76%, Max Drawdown = -6.95%
+2022: Portfolio = $323,741.09, Invested = $77,536.04, Profit = 317.54%, CAGR = 26.90%, Max Drawdown = -16.23%
+2023: Portfolio = $620,010.03, Invested = $89,865.03, Profit = 589.93%, CAGR = 31.77%, Max Drawdown = -12.14%
+2024: Portfolio = $1,853,660.44, Invested = $99,738.09, Profit = 1758.53%, CAGR = 44.09%, Max Drawdown = -12.98%
+
+==================================================
+
+=== VOO Annual Results ===
+
+ For VOO, Regular DCA : 
+2017: Portfolio = $13,709.47, Invested = $12,500.00, Profit = 9.68%, CAGR = 9.68%, Max Drawdown = 0.00%
+2018: Portfolio = $27,547.54, Invested = $25,000.00, Profit = 10.19%, CAGR = 4.97%, Max Drawdown = -2.30%
+2019: Portfolio = $45,105.06, Invested = $37,500.00, Profit = 20.28%, CAGR = 6.35%, Max Drawdown = -2.93%
+2020: Portfolio = $68,626.43, Invested = $50,000.00, Profit = 37.25%, CAGR = 8.24%, Max Drawdown = -19.90%
+2021: Portfolio = $99,299.27, Invested = $62,500.00, Profit = 58.88%, CAGR = 9.70%, Max Drawdown = -2.54%
+2022: Portfolio = $103,587.90, Invested = $75,000.00, Profit = 38.12%, CAGR = 5.53%, Max Drawdown = -14.48%
+2023: Portfolio = $132,268.57, Invested = $87,500.00, Profit = 51.16%, CAGR = 6.08%, Max Drawdown = -4.63%
+2024: Portfolio = $190,737.28, Invested = $100,000.00, Profit = 90.74%, CAGR = 8.41%, Max Drawdown = -3.53%
+
+ For VOO, Risk-Managed Enhanced Weighted DCA:
+2017: Portfolio = $15,224.80, Invested = $13,865.36, Profit = 9.80%, CAGR = 9.80%, Max Drawdown = 0.00%
+2018: Portfolio = $30,175.02, Invested = $27,220.07, Profit = 10.86%, CAGR = 5.29%, Max Drawdown = -1.86%
+2019: Portfolio = $52,318.91, Invested = $43,392.86, Profit = 20.57%, CAGR = 6.43%, Max Drawdown = -0.99%
+2020: Portfolio = $74,628.92, Invested = $53,621.33, Profit = 39.18%, CAGR = 8.62%, Max Drawdown = -16.79%
+2021: Portfolio = $107,321.16, Invested = $66,691.62, Profit = 60.92%, CAGR = 9.98%, Max Drawdown = -1.78%
+2022: Portfolio = $109,923.20, Invested = $78,051.63, Profit = 40.83%, CAGR = 5.87%, Max Drawdown = -14.92%
+2023: Portfolio = $143,813.07, Invested = $94,536.90, Profit = 52.12%, CAGR = 6.18%, Max Drawdown = -3.84%
+2024: Portfolio = $207,893.10, Invested = $108,488.11, Profit = 91.63%, CAGR = 8.47%, Max Drawdown = -3.06%
+
+==================================================
+
+=== SPXL Annual Results ===
+
+ For SPXL, Regular DCA : 
+2017: Portfolio = $16,150.54, Invested = $12,500.00, Profit = 29.20%, CAGR = 29.20%, Max Drawdown = 0.00%
+2018: Portfolio = $30,321.58, Invested = $25,000.00, Profit = 21.29%, CAGR = 10.13%, Max Drawdown = -16.58%
+2019: Portfolio = $55,165.10, Invested = $37,500.00, Profit = 47.11%, CAGR = 13.73%, Max Drawdown = -15.08%
+2020: Portfolio = $80,667.48, Invested = $50,000.00, Profit = 61.33%, CAGR = 12.70%, Max Drawdown = -63.96%
+2021: Portfolio = $162,870.41, Invested = $62,500.00, Profit = 160.59%, CAGR = 21.11%, Max Drawdown = -10.38%
+2022: Portfolio = $111,952.37, Invested = $75,000.00, Profit = 49.27%, CAGR = 6.90%, Max Drawdown = -57.10%
+2023: Portfolio = $155,795.34, Invested = $87,500.00, Profit = 78.05%, CAGR = 8.59%, Max Drawdown = -21.44%
+2024: Portfolio = $328,243.89, Invested = $100,000.00, Profit = 228.24%, CAGR = 16.02%, Max Drawdown = -13.04%
+
+ For SPXL, Risk-Managed Enhanced Weighted DCA:
+2017: Portfolio = $19,964.36, Invested = $15,172.50, Profit = 31.58%, CAGR = 31.58%, Max Drawdown = 0.00%
+2018: Portfolio = $36,132.88, Invested = $28,848.30, Profit = 25.25%, CAGR = 11.92%, Max Drawdown = -15.60%
+2019: Portfolio = $69,003.77, Invested = $45,670.53, Profit = 51.09%, CAGR = 14.75%, Max Drawdown = -10.24%
+2020: Portfolio = $97,469.36, Invested = $57,480.29, Profit = 69.57%, CAGR = 14.11%, Max Drawdown = -15.23%
+2021: Portfolio = $193,596.77, Invested = $70,451.29, Profit = 174.80%, CAGR = 22.41%, Max Drawdown = -10.00%
+2022: Portfolio = $201,695.14, Invested = $82,299.27, Profit = 145.08%, CAGR = 16.11%, Max Drawdown = -19.10%
+2023: Portfolio = $228,489.23, Invested = $100,140.97, Profit = 128.17%, CAGR = 12.51%, Max Drawdown = 0.00%
+2024: Portfolio = $389,734.80, Invested = $113,152.90, Profit = 244.43%, CAGR = 16.72%, Max Drawdown = -12.75%
+
+==================================================
+
+=== Mag7 ETF Annual Results ===
+
+ For Mag7 ETF, Regular DCA : 
+2017: Portfolio = $14,893.55, Invested = $12,500.00, Profit = 19.15%, CAGR = 19.15%, Max Drawdown = 0.00%
+       Breakdown:
+         AAPL: $2,078.17 (13.95%)
+         AMZN: $2,178.22 (14.63%)
+         GOOG: $1,868.49 (12.55%)
+         META: $2,119.70 (14.23%)
+         MSFT: $1,961.63 (13.17%)
+         TSLA: $2,014.20 (13.52%)
+         NVDA: $2,673.13 (17.95%)
+2018: Portfolio = $28,822.88, Invested = $25,000.00, Profit = 15.29%, CAGR = 7.37%, Max Drawdown = -7.84%
+       Breakdown:
+         AAPL: $3,892.30 (13.50%)
+         AMZN: $5,538.14 (19.21%)
+         GOOG: $3,660.83 (12.70%)
+         META: $3,117.36 (10.82%)
+         MSFT: $4,690.92 (16.27%)
+         TSLA: $4,262.14 (14.79%)
+         NVDA: $3,661.18 (12.70%)
+2019: Portfolio = $49,514.64, Invested = $37,500.00, Profit = 32.04%, CAGR = 9.71%, Max Drawdown = -12.05%
+       Breakdown:
+         AAPL: $8,468.67 (17.10%)
+         AMZN: $7,845.32 (15.84%)
+         GOOG: $5,442.09 (10.99%)
+         META: $5,620.11 (11.35%)
+         MSFT: $8,510.26 (17.19%)
+         TSLA: $6,168.89 (12.46%)
+         NVDA: $7,459.31 (15.06%)
+2020: Portfolio = $145,572.69, Invested = $50,000.00, Profit = 191.15%, CAGR = 30.63%, Max Drawdown = -16.06%
+       Breakdown:
+         AAPL: $18,034.81 (12.39%)
+         AMZN: $16,152.83 (11.10%)
+         GOOG: $8,329.63 (5.72%)
+         META: $8,737.21 (6.00%)
+         MSFT: $14,169.52 (9.73%)
+         TSLA: $60,778.97 (41.75%)
+         NVDA: $19,369.72 (13.31%)
+2021: Portfolio = $260,900.04, Invested = $62,500.00, Profit = 317.44%, CAGR = 33.08%, Max Drawdown = -7.83%
+       Breakdown:
+         AAPL: $28,585.36 (10.96%)
+         AMZN: $19,466.22 (7.46%)
+         GOOG: $16,195.34 (6.21%)
+         META: $12,664.22 (4.85%)
+         MSFT: $25,432.60 (9.75%)
+         TSLA: $107,144.00 (41.07%)
+         NVDA: $51,412.29 (19.71%)
+2022: Portfolio = $167,343.97, Invested = $75,000.00, Profit = 123.13%, CAGR = 14.31%, Max Drawdown = -39.38%
+       Breakdown:
+         AAPL: $27,797.02 (16.61%)
+         AMZN: $12,959.33 (7.74%)
+         GOOG: $13,123.67 (7.84%)
+         META: $5,986.85 (3.58%)
+         MSFT: $24,186.65 (14.45%)
+         TSLA: $49,504.69 (29.58%)
+         NVDA: $33,785.76 (20.19%)
+2023: Portfolio = $287,155.66, Invested = $87,500.00, Profit = 228.18%, CAGR = 18.50%, Max Drawdown = -9.36%
+       Breakdown:
+         AAPL: $33,412.13 (11.64%)
+         AMZN: $18,909.13 (6.58%)
+         GOOG: $16,814.51 (5.86%)
+         META: $14,204.92 (4.95%)
+         MSFT: $30,864.14 (10.75%)
+         TSLA: $80,555.20 (28.05%)
+         NVDA: $92,395.64 (32.18%)
+2024: Portfolio = $561,318.68, Invested = $100,000.00, Profit = 461.32%, CAGR = 24.07%, Max Drawdown = -8.23%
+       Breakdown:
+         AAPL: $45,260.68 (8.06%)
+         AMZN: $28,341.88 (5.05%)
+         GOOG: $23,743.53 (4.23%)
+         META: $24,510.50 (4.37%)
+         MSFT: $36,150.86 (6.44%)
+         TSLA: $139,255.64 (24.81%)
+         NVDA: $264,055.59 (47.04%)
+
+ For Mag7 ETF, Risk-Managed Enhanced Weighted DCA:
+2017: Portfolio = $15,338.13, Invested = $12,634.50, Profit = 21.40%, CAGR = 21.40%, Max Drawdown = 0.00%
+       Breakdown:
+         AAPL: $2,140.20 (13.95%)
+         AMZN: $2,243.24 (14.63%)
+         GOOG: $1,924.27 (12.55%)
+         META: $2,182.97 (14.23%)
+         MSFT: $2,020.19 (13.17%)
+         TSLA: $2,074.33 (13.52%)
+         NVDA: $2,752.93 (17.95%)
+2018: Portfolio = $28,457.20, Invested = $24,145.73, Profit = 17.86%, CAGR = 8.56%, Max Drawdown = -7.96%
+       Breakdown:
+         AAPL: $3,842.92 (13.50%)
+         AMZN: $5,467.88 (19.21%)
+         GOOG: $3,614.39 (12.70%)
+         META: $3,077.81 (10.82%)
+         MSFT: $4,631.41 (16.27%)
+         TSLA: $4,208.06 (14.79%)
+         NVDA: $3,614.73 (12.70%)
+2019: Portfolio = $52,105.96, Invested = $38,951.70, Profit = 33.77%, CAGR = 10.18%, Max Drawdown = -7.89%
+       Breakdown:
+         AAPL: $8,911.87 (17.10%)
+         AMZN: $8,255.90 (15.84%)
+         GOOG: $5,726.90 (10.99%)
+         META: $5,914.24 (11.35%)
+         MSFT: $8,955.64 (17.19%)
+         TSLA: $6,491.73 (12.46%)
+         NVDA: $7,849.69 (15.06%)
+2020: Portfolio = $145,989.75, Invested = $47,626.57, Profit = 206.53%, CAGR = 32.32%, Max Drawdown = -16.84%
+       Breakdown:
+         AAPL: $18,086.48 (12.39%)
+         AMZN: $16,199.11 (11.10%)
+         GOOG: $8,353.50 (5.72%)
+         META: $8,762.24 (6.00%)
+         MSFT: $14,210.12 (9.73%)
+         TSLA: $60,953.10 (41.75%)
+         NVDA: $19,425.21 (13.31%)
+2021: Portfolio = $258,301.11, Invested = $57,510.45, Profit = 349.14%, CAGR = 35.04%, Max Drawdown = -8.11%
+       Breakdown:
+         AAPL: $28,300.61 (10.96%)
+         AMZN: $19,272.31 (7.46%)
+         GOOG: $16,034.01 (6.21%)
+         META: $12,538.07 (4.85%)
+         MSFT: $25,179.26 (9.75%)
+         TSLA: $106,076.70 (41.07%)
+         NVDA: $50,900.15 (19.71%)
+2022: Portfolio = $228,592.03, Invested = $67,843.41, Profit = 236.94%, CAGR = 22.44%, Max Drawdown = -19.20%
+       Breakdown:
+         AAPL: $37,970.76 (16.61%)
+         AMZN: $17,702.46 (7.74%)
+         GOOG: $17,926.94 (7.84%)
+         META: $8,178.05 (3.58%)
+         MSFT: $33,038.98 (14.45%)
+         TSLA: $67,623.45 (29.58%)
+         NVDA: $46,151.39 (20.19%)
+2023: Portfolio = $282,167.71, Invested = $80,401.40, Profit = 250.95%, CAGR = 19.64%, Max Drawdown = -8.75%
+       Breakdown:
+         AAPL: $32,831.75 (11.64%)
+         AMZN: $18,580.67 (6.58%)
+         GOOG: $16,522.43 (5.86%)
+         META: $13,958.18 (4.95%)
+         MSFT: $30,328.02 (10.75%)
+         TSLA: $79,155.94 (28.05%)
+         NVDA: $90,790.71 (32.18%)
+2024: Portfolio = $547,427.92, Invested = $89,485.52, Profit = 511.75%, CAGR = 25.41%, Max Drawdown = -8.34%
+       Breakdown:
+         AAPL: $44,140.63 (8.06%)
+         AMZN: $27,640.51 (5.05%)
+         GOOG: $23,155.96 (4.23%)
+         META: $23,903.95 (4.37%)
+         MSFT: $35,256.25 (6.44%)
+         TSLA: $135,809.53 (24.81%)
+         NVDA: $257,521.10 (47.04%)
+
+==================================================
+
+=== Top 7 growth ETF Annual Results ===
+
+ For Top 7 growth ETF, Regular DCA : 
+2017: Portfolio = $14,187.54, Invested = $12,500.00, Profit = 13.50%, CAGR = 13.50%, Max Drawdown = 0.00%
+2018: Portfolio = $29,129.98, Invested = $25,000.00, Profit = 16.52%, CAGR = 7.94%, Max Drawdown = -17.36%
+2019: Portfolio = $44,544.46, Invested = $37,500.00, Profit = 18.79%, CAGR = 5.91%, Max Drawdown = -10.40%
+2020: Portfolio = $70,036.23, Invested = $50,000.00, Profit = 40.07%, CAGR = 8.79%, Max Drawdown = -34.62%
+2021: Portfolio = $157,717.16, Invested = $62,500.00, Profit = 152.35%, CAGR = 20.34%, Max Drawdown = -6.57%
+2022: Portfolio = $175,586.52, Invested = $75,000.00, Profit = 134.12%, CAGR = 15.23%, Max Drawdown = -22.88%
+2023: Portfolio = $279,681.06, Invested = $87,500.00, Profit = 219.64%, CAGR = 18.06%, Max Drawdown = -8.18%
+2024: Portfolio = $845,855.21, Invested = $100,000.00, Profit = 745.86%, CAGR = 30.59%, Max Drawdown = -8.38%
+
+ For Top 7 growth ETF, Risk-Managed Enhanced Weighted DCA:
+2017: Portfolio = $16,326.14, Invested = $14,179.66, Profit = 15.14%, CAGR = 15.14%, Max Drawdown = 0.00%
+2018: Portfolio = $32,716.09, Invested = $26,291.81, Profit = 24.43%, CAGR = 11.55%, Max Drawdown = -13.19%
+2019: Portfolio = $49,872.05, Invested = $41,259.82, Profit = 20.87%, CAGR = 6.52%, Max Drawdown = -2.56%
+2020: Portfolio = $75,244.85, Invested = $52,386.68, Profit = 43.63%, CAGR = 9.47%, Max Drawdown = -6.20%
+2021: Portfolio = $163,940.45, Invested = $61,932.00, Profit = 164.71%, CAGR = 21.49%, Max Drawdown = -5.84%
+2022: Portfolio = $179,067.87, Invested = $71,756.19, Profit = 149.55%, CAGR = 16.46%, Max Drawdown = -17.58%
+2023: Portfolio = $284,482.44, Invested = $84,034.08, Profit = 238.53%, CAGR = 19.03%, Max Drawdown = -7.91%
+2024: Portfolio = $851,852.49, Invested = $91,579.34, Profit = 830.18%, CAGR = 32.15%, Max Drawdown = -8.47%
+
+==================================================
+
