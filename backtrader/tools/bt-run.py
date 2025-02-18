@@ -196,13 +196,19 @@ def calculate_cagr(profit_pct, years):
     return cagr
 
 # --- Annual Reporting Function (with CAGR) ---
-def print_annual_results(df, ticker, start_capital=100000.0, start_year=None, file_handle=None):
+def print_annual_results(
+    df, 
+    ticker, 
+    start_capital=100000.0, 
+    start_year=None, 
+    file_handle=None
+):
     """
     Computes and prints the annual results for a given asset (including DCA 
     and Risk-Managed Enhanced Weighted DCA). If the asset is 'Mag7 ETF', also 
     prints the per-ticker dollar-value breakdown at year-end.
-
-    If a file_handle is provided, writes the output to that file as well.
+    If the asset is 'Top 7 growth ETF', also prints a *dynamic* breakdown 
+    (based on which 7 tickers apply for each year in top7_by_growth).
     """
     output_lines = []
     if start_year is None:
@@ -217,16 +223,41 @@ def print_annual_results(df, ticker, start_capital=100000.0, start_year=None, fi
     dca_yearly = dca_df.resample('YE').last()
     output_lines.append(f"\n For {ticker}, Regular DCA : ")
     
-    # If we want the breakdown for Mag7 ETF, pre-download its 7 stocks & build "normalized" prices:
+    # Prepare everything needed for the breakdown if needed:
+    # 1) For Mag7 ETF:
     mag7_components = ["AAPL", "AMZN", "GOOG", "META", "MSFT", "TSLA", "NVDA"]
     if ticker == "Mag7 ETF":
         start_idx = df.index[0]
-        end_idx   = df.index[-1]  # or + 1 day if you prefer
+        end_idx   = df.index[-1]
         comp_df = yf.download(mag7_components, start=start_idx, end=end_idx)["Close"].dropna(how="all")
-        # Normalize each ticker's prices by its first day
-        # so that each starts at 1.0 on day 0:
-        comp_norm = comp_df.div(comp_df.iloc[0])
+        comp_norm = comp_df.div(comp_df.iloc[0])  # day-0 normalization
+
+    # 2) For Top 7 growth ETF:
+    elif ticker == "Top 7 growth ETF":
+        # We'll need access to your global top7_by_growth (or you can pass it as a function parameter).
+        # We'll define a small helper to get the close price at (or right before) a given date
+        def get_close_at_or_before(df_stk, date):
+            df_sub = df_stk.loc[:date]
+            if df_sub.empty:
+                return None
+            return df_sub.iloc[-1]["Close"]
+        
+        # We also create a global cache so we don't re-download the same ticker for every year
+        # (optional optimization). We'll store in a dict: {ticker: df}
+        if not hasattr(print_annual_results, "_ticker_cache"):
+            print_annual_results._ticker_cache = {}
+        ticker_cache = print_annual_results._ticker_cache
+
+        # We'll define a function that ensures we have a DataFrame for a given stock in the cache:
+        def ensure_ticker_data(stock):
+            if stock not in ticker_cache:
+                dtemp = yf.download(stock, start="2010-01-01", end="2030-01-01")  # a broad range
+                if isinstance(dtemp.columns, pd.MultiIndex):
+                    dtemp.columns = dtemp.columns.get_level_values(0)
+                ticker_cache[stock] = dtemp.dropna(subset=["Close"])
+            return ticker_cache[stock]
     
+    # Loop over each year-end row in DCA
     for date, row in dca_yearly.iterrows():
         year = date.year
         portfolio_value = row['portfolio']
@@ -236,41 +267,73 @@ def print_annual_results(df, ticker, start_capital=100000.0, start_year=None, fi
         n = year - start_year + 1
         cagr = calculate_cagr(profit_pct, n)
 
-        # Basic line with the performance
         line = (f"{year}: Portfolio = ${portfolio_value:,.2f}, "
                 f"Invested = ${invested:,.2f}, Profit = {profit_pct:.2f}%, "
                 f"CAGR = {cagr:.2f}%, Max Drawdown = {dd:.2f}%")
         output_lines.append(line)
 
-        # ------------------------
-        # Print holdings breakdown
-        # ------------------------
+        # ---- Breakdown for Mag7
         if ticker == "Mag7 ETF":
             # Find the closest date <= this "year-end" in comp_norm
             # so we can get normalized prices for that day.
             if date in comp_norm.index:
                 row_norm = comp_norm.loc[date]
             else:
-                # fallback to last available date on or before `date`
+                # fallback: last available date on or before `date`
                 row_norm = comp_norm.loc[:date].iloc[-1]
             
             # sum of all normalized prices for that day
             sum_norm = row_norm.sum()
-            # We'll build lines for each ticker
-            breakdown_lines = ["       Breakdown:"]
+            breakdown_lines = ["       Breakdown (Mag7):"]
             for stock in mag7_components:
-                # If the stock data doesn't exist on this date (NaN or missing),
-                # skip or treat as zero
-                if pd.isna(row_norm.get(stock, np.nan)):
+                val = row_norm.get(stock, np.nan)
+                if pd.isna(val):
                     continue
-
-                weight_j = row_norm[stock] / sum_norm  # fraction in the index
+                weight_j = val / sum_norm
                 dollar_j = weight_j * portfolio_value
-                pct_j    = weight_j * 100.0
+                pct_j    = weight_j * 100
                 breakdown_lines.append(
                     f"         {stock}: ${dollar_j:,.2f} ({pct_j:.2f}%)"
                 )
             output_lines.extend(breakdown_lines)
+        
+        # ---- Breakdown for Top 7 Growth
+        elif ticker == "Top 7 growth ETF":
+            from __main__ import top7_by_growth  # ensure we have the dict
+            if year not in top7_by_growth:
+                # If your range extends past 2025 or before 2017, you might not have a key.
+                output_lines.append(f"       [No top7 data for year={year}]")
+            else:
+                tickers_for_year = top7_by_growth[year]
+                if len(tickers_for_year) == 0:
+                    output_lines.append(f"       [No tickers in top7_by_growth for {year}]")
+                    continue
+
+                # For each ticker, we compute ratio = close(year-end) / close(year-start)
+                year_start = pd.Timestamp(f"{year}-01-01")
+                ratios = {}
+                for st in tickers_for_year:
+                    df_st = ensure_ticker_data(st)  # from the cache
+                    c0 = get_close_at_or_before(df_st, year_start)
+                    c1 = get_close_at_or_before(df_st, date)
+                    if c0 is None or c1 is None or c0 == 0:
+                        continue
+                    ratios[st] = c1 / c0
+                
+                if len(ratios) == 0:
+                    output_lines.append(f"       [No valid ratio data for {year}]")
+                    continue
+
+                sum_ratios = sum(ratios.values())
+                breakdown_lines = [f"       Breakdown (Top7 for {year}):"]
+                for st, ratio_val in ratios.items():
+                    w_st = ratio_val / sum_ratios
+                    d_st = w_st * portfolio_value
+                    p_st = w_st * 100
+                    breakdown_lines.append(
+                        f"         {st}: ${d_st:,.2f} ({p_st:.2f}%)"
+                    )
+                output_lines.extend(breakdown_lines)
 
     # ------------------------------------------------------------------------
     # 2) Risk-Managed Enhanced Weighted DCA
@@ -278,6 +341,8 @@ def print_annual_results(df, ticker, start_capital=100000.0, start_year=None, fi
     rmewdca_df = risk_managed_enhanced_dca_portfolio_series(df, start_capital, stop_loss_pct=20)
     rmewdca_yearly = rmewdca_df.resample('YE').last()
     output_lines.append(f"\n For {ticker}, Risk-Managed Enhanced Weighted DCA:")
+    
+    # Loop over each year-end in the RMEW-DCA
     for date, row in rmewdca_yearly.iterrows():
         year = date.year
         portfolio_value = row['portfolio']
@@ -287,34 +352,67 @@ def print_annual_results(df, ticker, start_capital=100000.0, start_year=None, fi
         n = year - start_year + 1
         cagr = calculate_cagr(profit_pct, n)
 
-        # Basic line with the performance
         line = (f"{year}: Portfolio = ${portfolio_value:,.2f}, "
                 f"Invested = ${invested:,.2f}, Profit = {profit_pct:.2f}%, "
                 f"CAGR = {cagr:.2f}%, Max Drawdown = {dd:.2f}%")
         output_lines.append(line)
 
-        # ------------------------
-        # Print holdings breakdown
-        # ------------------------
+        # ---- Breakdown for Mag7
         if ticker == "Mag7 ETF":
-            # Same approach to find normalized row on or before date
             if date in comp_norm.index:
                 row_norm = comp_norm.loc[date]
             else:
                 row_norm = comp_norm.loc[:date].iloc[-1]
-            
             sum_norm = row_norm.sum()
-            breakdown_lines = ["       Breakdown:"]
+            breakdown_lines = ["       Breakdown (Mag7):"]
             for stock in mag7_components:
-                if pd.isna(row_norm.get(stock, np.nan)):
+                val = row_norm.get(stock, np.nan)
+                if pd.isna(val):
                     continue
-                weight_j = row_norm[stock] / sum_norm
+                weight_j = val / sum_norm
                 dollar_j = weight_j * portfolio_value
-                pct_j = weight_j * 100.0
+                pct_j    = weight_j * 100
                 breakdown_lines.append(
                     f"         {stock}: ${dollar_j:,.2f} ({pct_j:.2f}%)"
                 )
             output_lines.extend(breakdown_lines)
+
+        # ---- Breakdown for Top 7 Growth
+        elif ticker == "Top 7 growth ETF":
+            from __main__ import top7_by_growth
+            if year not in top7_by_growth:
+                output_lines.append(f"       [No top7 data for year={year}]")
+            else:
+                tickers_for_year = top7_by_growth[year]
+                if len(tickers_for_year) == 0:
+                    output_lines.append(f"       [No tickers in top7_by_growth for {year}]")
+                    continue
+                
+                year_start = pd.Timestamp(f"{year}-01-01")
+                # same ratio logic as above
+                ratios = {}
+                for st in tickers_for_year:
+                    df_st = ensure_ticker_data(st)
+                    c0 = get_close_at_or_before(df_st, year_start)
+                    c1 = get_close_at_or_before(df_st, date)
+                    if c0 is None or c1 is None or c0 == 0:
+                        continue
+                    ratios[st] = c1 / c0
+                
+                if len(ratios) == 0:
+                    output_lines.append(f"       [No valid ratio data for {year}]")
+                    continue
+                
+                sum_ratios = sum(ratios.values())
+                breakdown_lines = [f"       Breakdown (Top7 for {year}):"]
+                for st, ratio_val in ratios.items():
+                    w_st = ratio_val / sum_ratios
+                    d_st = w_st * portfolio_value
+                    p_st = w_st * 100
+                    breakdown_lines.append(
+                        f"         {st}: ${d_st:,.2f} ({p_st:.2f}%)"
+                    )
+                output_lines.extend(breakdown_lines)
     
     output_lines.append("\n" + "="*50 + "\n")
 
@@ -325,6 +423,7 @@ def print_annual_results(df, ticker, start_capital=100000.0, start_year=None, fi
     # --- Optionally write to file ---
     if file_handle is not None:
         file_handle.write("\n".join(output_lines) + "\n")
+
 
 
 
