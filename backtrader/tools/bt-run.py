@@ -6,7 +6,6 @@ from datetime import datetime
 # Top 7 stock  market cap groth rate each year, CAGR = 32%, (8 yrs return 830%), maxdrawdown = -13%
 # Compared to VOO CAGR 8.45% (8 yrs return 91%), maxdrawdon = -16%
 
- 
 top7_by_growth = {
     2017: ['AMD', 'NVDA', 'FCX', 'TRGP', 'TPL', 'OKE', 'STLD'], 
     2018: ['ALGN', 'ANET', 'TTWO', 'BA', 'NVDA', 'NVR', 'FSLR'],
@@ -16,7 +15,8 @@ top7_by_growth = {
     2022: ['DVN', 'F', 'FANG', 'FTNT', 'NVDA', 'NUE', 'BLDR'], 
     2023: ['FSLR', 'TPL', 'OXY', 'STLD', 'SMCI', 'ENPH', 'HES'], 
     2024: ['SMCI', 'NVDA', 'CRWD', 'META', 'PLTR', 'PANW', 'BLDR'], 
-    2025: ['VST', 'PLTR', 'UAL', 'TPL', 'CEG', 'TRGP', 'NVDA']}
+    2025: ['VST', 'PLTR', 'UAL', 'TPL', 'CEG', 'TRGP', 'NVDA']
+}
 
 # --- Technical Indicator Helper ---
 def compute_RSI(series, window=3):
@@ -176,8 +176,7 @@ def create_dynamic_etf_df(top7_by_growth, start_date, end_date, start_capital=0.
     Returns:
     - DataFrame with 'Close' and 'Volume' columns
     """
-    # Get all unique stocks
-    # top7_by_growth = ["AAPL", "AMZN", "GOOG", "META", "MSFT", "TSLA", "NVDA"]
+    # For each year, download data (here the implementation is a simple example)
     for year in sorted(top7_by_growth.keys()):
         df = yf.download(top7_by_growth[year], start=start_date, end=end_date)['Close']
     df.index = pd.to_datetime(df.index)
@@ -193,8 +192,7 @@ def get_stock_data(ticker, start_date, end_date):
         df.columns = df.columns.get_level_values(0)
     return df
 
-def dynamic_multi_stock_portfolio_series(
-    top7_by_growth, start_date, end_date, monthly_investment=1000.0):
+def dynamic_multi_stock_portfolio_series(top7_by_growth, start_date, end_date, monthly_investment=1000.0):
     """
     Dynamic multi-stock portfolio strategy:
     - Invests monthly_investment each month
@@ -218,18 +216,13 @@ def dynamic_multi_stock_portfolio_series(
     dates = []
     holdings = {ticker: 0 for ticker in all_stocks}  # Track shares held for each stock
     
-    print(f"~ year: {year}")
-    
     # Process each year
     for year in range(int(start_date[:4]), int(end_date[:4])):
-        print(f"~ year: {year}")
         if year not in top7_by_growth:
             continue
         
         current_stocks = top7_by_growth[year]
-        print(f"~current_stocks: {current_stocks}")
         monthly_per_stock = monthly_investment / len(current_stocks)
-        print(f"~monthly_per_stock: {monthly_per_stock}")
         
         # Process each month in the year
         for month in range(1, 13):
@@ -237,7 +230,7 @@ def dynamic_multi_stock_portfolio_series(
             if current_date >= pd.Timestamp(end_date):
                 break
                 
-            # Find the first trading day of the month
+            # For each stock, invest on the first trading day of the month
             for stock in current_stocks:
                 df = stock_data[stock]
                 monthly_data = df[df.index.year == year]
@@ -265,7 +258,7 @@ def dynamic_multi_stock_portfolio_series(
                         total_value += holdings[stock] * price
             
             portfolio_values.append(total_value)
-            invested_amounts.append(monthly_investment * (len(portfolio_values)))
+            invested_amounts.append(monthly_investment * len(portfolio_values))
             dates.append(first_trading_day)
             
         # Year-end rebalancing (optional)
@@ -276,7 +269,6 @@ def dynamic_multi_stock_portfolio_series(
         "invested": invested_amounts
     }, index=dates)
 
-
 # --- CAGR Calculation Helper ---
 def calculate_cagr(profit_pct, years):
     """
@@ -284,19 +276,24 @@ def calculate_cagr(profit_pct, years):
     years: number of years elapsed
     """
     cagr = ((1+profit_pct/100) ** (1/years) - 1) * 100
-    # print(f"profit_pct: {profit_pct}, years {years}")
     return cagr
 
 # --- Annual Reporting Function (with CAGR) ---
-def print_annual_results(df, ticker, start_capital=100000.0, start_year=None):
+def print_annual_results(df, ticker, start_capital=100000.0, start_year=None, file_handle=None):
+    """
+    Computes and prints the annual results for a given asset.
+    If a file_handle is provided, it writes the output to that file as well.
+    """
+    output_lines = []
     if start_year is None:
         start_year = int(pd.to_datetime(df.index[0]).year)
-    print(f"=== {ticker} Annual Results ===")
+    header = f"=== {ticker} Annual Results ==="
+    output_lines.append(header)
     
     # Regular DCA
     dca_df = dca_portfolio_series(df, start_capital)
     dca_yearly = dca_df.resample('YE').last()
-    print(f"\n {ticker} Regular DCA : ")
+    output_lines.append(f"\n For {ticker}, Regular DCA : ")
     for date, row in dca_yearly.iterrows():
         year = date.year
         portfolio_value = row['portfolio']
@@ -305,12 +302,13 @@ def print_annual_results(df, ticker, start_capital=100000.0, start_year=None):
         dd = annual_max_drawdown(dca_df['portfolio'], year)
         n = year - start_year + 1
         cagr = calculate_cagr(profit_pct, n)
-        print(f"{year}: Portfolio = ${portfolio_value:,.2f}, Invested = ${invested:,.2f}, Profit = {profit_pct:.2f}%, CAGR = {cagr:.2f}%, Max Drawdown = {dd:.2f}%")
+        line = f"{year}: Portfolio = ${portfolio_value:,.2f}, Invested = ${invested:,.2f}, Profit = {profit_pct:.2f}%, CAGR = {cagr:.2f}%, Max Drawdown = {dd:.2f}%"
+        output_lines.append(line)
     
     # Risk-Managed Enhanced Weighted DCA
     rmewdca_df = risk_managed_enhanced_dca_portfolio_series(df, start_capital, stop_loss_pct=20)
     rmewdca_yearly = rmewdca_df.resample('YE').last()
-    print(f"\n {ticker} Risk-Managed Enhanced Weighted DCA:")
+    output_lines.append(f"\n For {ticker}, Risk-Managed Enhanced Weighted DCA:")
     for date, row in rmewdca_yearly.iterrows():
         year = date.year
         portfolio_value = row['portfolio']
@@ -319,9 +317,18 @@ def print_annual_results(df, ticker, start_capital=100000.0, start_year=None):
         dd = annual_max_drawdown(rmewdca_df['portfolio'], year)
         n = year - start_year + 1
         cagr = calculate_cagr(profit_pct, n)
-        print(f"{year}: Portfolio = ${portfolio_value:,.2f}, Invested = ${invested:,.2f}, Profit = {profit_pct:.2f}%, CAGR = {cagr:.2f}%, Max Drawdown = {dd:.2f}%")
+        line = f"{year}: Portfolio = ${portfolio_value:,.2f}, Invested = ${invested:,.2f}, Profit = {profit_pct:.2f}%, CAGR = {cagr:.2f}%, Max Drawdown = {dd:.2f}%"
+        output_lines.append(line)
     
-    print("\n" + "="*50 + "\n")
+    output_lines.append("\n" + "="*50 + "\n")
+    
+    # Print to console
+    for line in output_lines:
+        print(line)
+    
+    # Write to file if file_handle is provided
+    if file_handle is not None:
+        file_handle.write("\n".join(output_lines) + "\n")
 
 # --- Settings and Data Download ---
 start_date = '2017-01-01'
@@ -348,16 +355,15 @@ mag7_etf_df = create_mag7_etf_df(start_date, end_date, start_capital)
 data["Mag7 ETF"] = mag7_etf_df
 
 dynamic_etf_df = create_dynamic_etf_df(
-            top7_by_growth,
-            start_date,
-            end_date,
-            100000
-        )
-
-# print(f"~dynamic_etf_df:  {dynamic_etf_df.head(n=50).to_string()}")
+    top7_by_growth,
+    start_date,
+    end_date,
+    100000
+)
 data["Top 7 growth ETF"] = dynamic_etf_df
 
-
-# --- Print Annual Results for Each Asset ---
-for name, df in data.items():
-    print_annual_results(df, name, start_capital)
+# Open a file to write the annual results locally.
+with open("annual_results.txt", "w") as f:
+    # --- Print Annual Results for Each Asset ---
+    for name, df in data.items():
+        print_annual_results(df, name, start_capital, file_handle=f)

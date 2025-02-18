@@ -82,7 +82,7 @@ def main():
     print("=== Top 7 by Market Cap each year ===")
     print(df_top_by_cap)
     
-    print("\n=== Top 7 by Market Cap Growth each year ===")
+    print("\n=== Top 7 by Market Cap Growth Rate each year ===")
     print(df_top_growth)
     
     # If you want to save them to CSV, do:
